@@ -124,6 +124,7 @@ export default {
     z-index: 1;
     border-radius: 20px;
     box-shadow: 0px 0px 30px #740b0b45;
+    background-color: #fff;
   }
 }
 .cardapio-item-content-text {
