@@ -11,3 +11,11 @@ ou
 npm install 
 npm serve
 ```
+##### Após isto para rodar usar apenas:
+```
+yarn serve
+```
+ou 
+```
+npm serve
+```
