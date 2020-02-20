@@ -11,46 +11,29 @@
     <div id="contentInputs">
       <div id="row-inputs">
         <div class="mediuminput">
-          <input
-            v-model="foodTitle"
-            placeholder="Titulo do pedido"
-            class="inputPd mediuminput"
-          />
-          <span v-if="errofoodTitle"
-            >O campo de titulo deve ter entre 3 e 60 caracteres*</span
-          >
-          <span v-else> </span>
+          <input v-model="foodTitle" placeholder="Titulo do pedido" class="inputPd mediuminput" />
+          <span v-if="errofoodTitle">O campo de titulo deve ter entre 3 e 60 caracteres*</span>
+          <span v-else></span>
         </div>
         <div class="mediuminput">
-          <input
-            required
-            v-model="foodFlavor"
-            placeholder="Sabor"
-            class="inputPd mediuminput"
-          />
-          <span v-if="errofoodFlavor">
-            O campo de sabor deve ter entre 3 e 60 caracteres*</span
-          >
-          <span v-else> </span>
+          <input required v-model="foodFlavor" placeholder="Sabor" class="inputPd mediuminput" />
+          <span v-if="errofoodFlavor">O campo de sabor deve ter entre 3 e 60 caracteres*</span>
+          <span v-else></span>
         </div>
         <div class="smallInput">
           <input
             v-model.number="foodPrice"
             placeholder="Preço"
             type="number"
-            class="inputPd smallInput"
+            class="inputPd mediuminput"
             min="0"
           />
-          <span v-if="errofoodPrice">O campo de valor não pode ser vazio*</span>
-          <span v-else> </span>
+          <span v-if="errofoodPrice">O campo de valor deve ser um número*</span>
+          <span v-else></span>
         </div>
       </div>
 
-      <textarea
-        v-model="foodDescription"
-        placeholder="Descrição"
-        class="inputPd mediuminput"
-      />
+      <textarea v-model="foodDescription" placeholder="Descrição" class="inputPd mediuminput" />
 
       <!-- coloquei para aceitar apenas imagens, pq o filtro nativo (accept="image/x-png, image/jpeg"), não funciona no firefox -->
       <input
@@ -62,18 +45,13 @@
       />
       <label for="imagepicker" id="file-input-pd">
         <!-- <img src=""/> -->
-        <img
-          v-if="imageData"
-          v-bind:src="imageData"
-          style="width:10rem; height:auto"
-        />
+        <img v-if="imageData" v-bind:src="imageData" style="width:10rem; height:auto" />
+        <img v-else src="../assets/cloud_upload.svg" style="width:10rem; height:auto" />
         <p v-if="!imageData">
           Jogue aqui o arquivo de imagem do seu pastel ou clique para localizar
           a pasta.
         </p>
-        <p v-else>
-          Clique aqui para alterar a imagem
-        </p>
+        <p v-else>Clique aqui para alterar a imagem</p>
       </label>
       <div v-if="imageError" id="error-alert">
         <p>As imagens só podem ser png ou jpg</p>
@@ -154,7 +132,10 @@ export default {
         sucess = false;
         this.errofoodFlavor = true;
       }
-      if (this.foodPrice === null) {
+      if (
+        this.foodPrice === null ||
+        Number(this.foodPrice) !== this.foodPrice
+      ) {
         sucess = false;
         this.errofoodPrice = true;
       }
@@ -187,21 +168,24 @@ export default {
 #header {
   display: flex;
   flex-direction: row;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 5rem;
   background-color: #ffca00;
   border-radius: 20px 20px 0px 0px;
   align-items: center;
+  flex-wrap: wrap;
   h3 {
     color: #a03400;
     text-align: left;
     font-style: italic;
     flex-grow: 2;
+    z-index: 22;
   }
   div {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+    z-index: 22;
     span {
       margin-left: 0.15rem;
       margin-right: 0.15rem;
@@ -226,6 +210,7 @@ export default {
   margin-right: 0.5rem;
   margin-top: 0.5rem;
   padding: 10px;
+  z-index: 22;
 }
 #row-inputs {
   display: flex;

@@ -5,27 +5,33 @@
       <span>Veja como será apresentado ao cliente</span>
       <div class="line" />
     </div>
-    <div
-      id="cardapio-item-container"
-      v-for="(item, index) in listItens"
-      v-bind:key="index"
-    >
+    <div id="cardapio-item-container" v-for="(item, index) in listItens" v-bind:key="index">
       <div class="cardapio-item">
         <div class="cardapio-item-header">
           <span class="cardapio-item-title">{{ item.foodTitle }}</span>
-          <span class="cardapio-item-price">{{
+          <span class="cardapio-item-price">
+            {{
             new Intl.NumberFormat("pt-Br", {
-              style: "currency",
-              currency: "BRL"
+            style: "currency",
+            currency: "BRL"
             }).format(item.foodPrice)
-          }}</span>
+            }}
+          </span>
         </div>
         <div class="cardapio-item-content">
           <img v-if="item.imageData" v-bind:src="item.imageData" />
+          <img v-else-if="item.isDrimk" src="../assets/bebida-padrao.jpeg" />
           <img v-else src="../assets/pastel-img.png" />
+
           <div class="cardapio-item-content-text">
-            <p><strong>Sabor:</strong> {{ item.foodFlavor }}</p>
-            <p><strong>Descrição:</strong> {{ item.foodDescription }}</p>
+            <p>
+              <strong>Sabor:</strong>
+              {{ item.foodFlavor }}
+            </p>
+            <p>
+              <strong>Descrição:</strong>
+              {{ item.foodDescription }}
+            </p>
           </div>
         </div>
       </div>
