@@ -1,24 +1,13 @@
-# pastel-de-ideias
+## Projeto para teste na empresa Doc88.
 
-## Project setup
+#####Para rodar o projeto pela primeira vez:
+
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn serve
 ```
-
-### Compiles and minifies for production
+ou 
 ```
-yarn build
+npm install 
+npm serve
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
