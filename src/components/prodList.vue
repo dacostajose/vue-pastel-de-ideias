@@ -19,8 +19,8 @@
           </span>
         </div>
         <div class="cardapio-item-content">
-          <img v-if="item.imageData" v-bind:src="item.imageData" />
-          <img v-else-if="item.isDrimk" src="../assets/bebida-padrao.jpeg" />
+          <img v-if="item.imageData" v-bind:src="'http://localhost:5000'+item.imageData" />
+          <img v-else-if="item.isDrink" src="../assets/bebida-padrao.jpeg" />
           <img v-else src="../assets/pastel-img.png" />
 
           <div class="cardapio-item-content-text">
@@ -54,7 +54,13 @@ export default {
 
 <style scoped lang="scss">
 #produtList {
-  margin-top: 5rem;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding-top: 5rem;
 }
 #line-header-container {
   display: flex;
@@ -95,7 +101,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1rem 1rem 1rem 4rem;
+  padding: 1rem 1rem 1rem 7rem;
   font-size: 1.25rem;
   font-style: italic;
   .cardapio-item-title {
@@ -121,6 +127,7 @@ export default {
     height: 180px;
     margin-left: -12rem;
     margin-top: -3rem;
+    margin-right: 3rem;
     z-index: 1;
     border-radius: 20px;
     box-shadow: 0px 0px 30px #740b0b45;

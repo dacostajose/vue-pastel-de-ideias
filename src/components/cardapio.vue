@@ -4,7 +4,7 @@
       <h3>Monte aqui o seu cardápio. O que está esperando?</h3>
       <div>
         <span>Comida</span>
-        <toggle-button color="#E33535" id="toggleButton" v-model="isDrimk" />
+        <toggle-button color="#E33535" id="toggleButton" v-model="isDrink" />
         <span>Bebida</span>
       </div>
     </div>
@@ -87,7 +87,8 @@ export default {
       imageData: "",
       erroimageData: "",
       imageError: false,
-      isDrimk: false
+      isDrink: false,
+      imageFile: ""
     };
   },
   methods: {
@@ -101,6 +102,7 @@ export default {
       ) {
         this.imageError = false;
         this.imageData = URL.createObjectURL(file);
+        this.imageFile = file;
       } else {
         this.imageData = "";
         this.imageError = true;
@@ -145,10 +147,10 @@ export default {
           foodFlavor: this.foodFlavor,
           foodPrice: this.foodPrice,
           foodDescription: this.foodDescription,
-          imageData: this.imageData,
-          isDrimk: this.isDrimk
+          imageData: "",
+          isDrink: this.isDrink
         };
-        this.method(data);
+        this.method(data, this.imageFile);
 
         this.cleanFields();
       }

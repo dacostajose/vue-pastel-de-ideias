@@ -65,6 +65,13 @@
 // @ is an alias to /src
 import GerarCardapio from "../components/cardapio";
 import ProdutList from "../components/prodList";
+import axios from "axios";
+const api_url = "http://localhost:5000/";
+const headRequest = {
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
+};
 export default {
   name: "Home",
   components: {
@@ -76,9 +83,40 @@ export default {
       cardapio: []
     };
   },
+  mounted() {
+    axios({
+      method: "GET",
+      url: api_url + "products",
+      headRequest
+    })
+      .then(response => {
+        this.cardapio = [...response.data.products];
+      })
+      .catch(e => console.log(e));
+  },
   methods: {
-    addItem(item) {
-      this.cardapio.unshift(item);
+    addItem(item, file) {
+      axios({
+        method: "POST",
+        url: api_url + "product",
+        data: item,
+        headRequest
+      })
+        .then(response => {
+          console.log(response);
+          console.log(file);
+          if (file) {
+            let formData = new FormData();
+            formData.append("image", file);
+            axios({
+              method: "PUT",
+              url: api_url + "product/" + response.data.id,
+              data: formData,
+              headRequest
+            }).then(response);
+          }
+        })
+        .catch(e => console.log(e));
     }
   }
 };
